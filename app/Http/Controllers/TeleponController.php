@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Siswa;
 use App\Models\Telepon;
 use Illuminate\Http\Request;
 
@@ -19,9 +19,10 @@ class TeleponController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($siswa)
     {
-        //
+        $datasiswa = Siswa::findOrFail($siswa);
+        return view('Telepon.add',compact('datasiswa'));
     }
 
     /**

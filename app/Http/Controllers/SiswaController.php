@@ -24,7 +24,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        $datahobi = Hobi::all();
+        return view('Nama.add',compact('datahobi'));
     }
 
     /**
@@ -34,13 +35,13 @@ class SiswaController extends Controller
     {
        
         $request->validate([
-            'name' => 'required|min:3|max:20',
+            'name' => 'required|min:3|max:100',
             'nisn' => 'required|unique:nisns,nisn|numeric|max_digits:20',
             'hobis' => 'required|array|min:1', 
         ], [
             'name.required' => 'Nama siswa tidak boleh kosong',
             'name.min' => 'Nama siswa minimal 3 karakter',
-            'name.max' => 'Nama siswa maksimal 20 karakter',
+            'name.max' => 'Nama siswa maksimal 100 karakter',
             'nisn.required' => 'NISN tidak boleh kosong',
             'nisn.unique' => 'NISN sudah ada',
             'nisn.numeric' => 'NISN harus angka',
@@ -94,13 +95,13 @@ class SiswaController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|min:3|max:20',
+            'name' => 'required|min:3|max:100',
             'nisn' => 'required|max_digits:20|numeric', 
             'hobis' => 'required|array|min:1', 
         ],[
             'name.required' => 'Nama hobi tidak boleh kosong',
             'name.min' => 'Nama hobi minimal 3 karakter',
-            'name.max' => 'Nama hobi maksimal 20 karakter',
+            'name.max' => 'Nama hobi maksimal 100 karakter',
             'nisn.required' => 'Nisn tidak boleh kosong',
             'nisn.max' => 'Nisn maksimal 20 karakter',
             'nisn.numeric' => 'Nisn harus berupa angka',

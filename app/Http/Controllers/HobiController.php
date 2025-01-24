@@ -21,7 +21,7 @@ class HobiController extends Controller
      */
     public function create()
     {
-        //
+        return view('Hobi.add');
     }
 
     /**

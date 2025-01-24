@@ -1,145 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>crud hobi sederhana</title>
-</head>
-
-<body>
-    @include('components.nav')
-    <div class="container mt-5">
-        <h1 class="text-center">Data Hobi</h1>
-        <div id="flash-messages" class="mb-3">
-            {{-- @if (@session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+@extends('layouts.index')
+@section('content')
+    <ul class="m-0 p-0 list-none">
+        <li class="inline-block relative top-[3px] text-base text-primary-500 font-Inter ">
+            <a href="index.html">
+                <iconify-icon icon="heroicons-outline:home"></iconify-icon>
+                <iconify-icon icon="heroicons-outline:chevron-right"
+                    class="relative text-slate-500 text-sm rtl:rotate-180"></iconify-icon>
+            </a>
+        </li>
+        <li class="inline-block relative text-sm text-primary-500 font-Inter ">
+            Data
+            <iconify-icon icon="heroicons-outline:chevron-right"
+                class="relative top-[3px] text-slate-500 rtl:rotate-180"></iconify-icon>
+        </li>
+        <li class="inline-block relative text-sm text-slate-500 font-Inter dark:text-white">
+            Hobby</li>
+    </ul>
+    <div class="card mt-5">
+        <header class=" card-header noborder">
+            <h4 class="card-title">Data Hobby
+            </h4>
+        </header>
+        <div class="card-body px-6 pb-6">
+            <div class="flex justify-end">
+                <a href="{{ route('hobi.create') }}" class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">Tambah
+                    hobi</a>
             </div>
-            @endif
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $item)
-                        <li>{{ $item }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif --}}
-        </div>
+            <div class="overflow-x-auto -mx-6 dashcode-data-table">
+                <span class=" col-span-8  hidden"></span>
+                <span class="  col-span-4 hidden"></span>
+                <div class="inline-block min-w-full align-middle">
+                    <div class="overflow-hidden ">
+                        <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700 data-table">
+                            <thead class=" bg-slate-200 dark:bg-slate-700">
+                                <tr>
 
-        <!-- Add New Item Button -->
-        <div class="d-flex justify-content-end mb-3">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Tambah data</button>
-        </div>
+                                    <th scope="col" class=" table-th ">
+                                        Id
+                                    </th>
 
-        <!-- Table -->
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Hobi</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="crud-table-body">
-                @foreach ($datahobi as $key => $hobi)
-                    <tr>
-                        <td>{{ $key + 1 }}</td>
-                        <td>{{ $hobi->name }}</td>
-                        <td class="d-flex justify-end">
-                            <form action="{{ route('hobi.destroy', $hobi->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('apakah kamu yakin ingin menghapus data ini?')">Delete</button>
-                            </form> |
-                            <a href="{{ route('hobi.edit', $hobi->id) }}" class="btn btn-success">Edit</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                                    <th scope="col" class=" table-th ">
+                                        hobi
+                                    </th>
 
-    <!-- Modal create -->
-    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createModalLabel">Tambah data</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('hobi.store') }}" method="POST" id="createForm">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="itemName" class="form-label">Nama Hobi</label>
-                            <input type="text" class="form-control" id="itemName" name="name" required
-                                value="{{ old('name') }}">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
+                                    <th scope="col" class=" table-th ">
+                                        Action
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+                                @foreach ($datahobi as $hobi)
+                                    <tr>
+                                        <td class="table-td">{{ $loop->iteration }}</td>
+                                        <td class="table-td ">{{ $hobi->name }}</td>
+                                        <td class="table-td ">
+                                            <div class="flex space-x-3 rtl:space-x-reverse">
+                                                <a href="{{ route('hobi.edit', $hobi->id) }}" class="action-btn"
+                                                    type="button">
+                                                    <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
+                                                </a>
+                                                <form action="{{ route('hobi.destroy',$hobi->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="action-btn" type="button">
+                                                        <iconify-icon icon="heroicons:trash"></iconify-icon>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    {{-- <!-- Modal create -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createModalLabel">Edit data</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="POST" id="createForm">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="itemName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="itemName" name="name" required value="{{ old('name') }}>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- Scripts for Modal -->
     <script>
-        @if (@session('success'))
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
+        // Get elements
+        const openModalButton = document.getElementById('openModal');
+        const closeModalButtons = document.querySelectorAll('#closeModal, #closeModalFooter');
+        const modal = document.getElementById('modal');
+
+        // Open modal
+        openModalButton.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+        // Close modal
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
             });
-            Toast.fire({
-                icon: "success",
-                title: "{{ session('success') }}"
-            });
-        @endif
+        });
 
-        @if ($errors->any())
-            @foreach ($errors->all() as $item)
-
-
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "{{ $item }}",
-                });
-            @endforeach
-        @endif
+        // Close modal when clicking outside of it
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+@endsection
