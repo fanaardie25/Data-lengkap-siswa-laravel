@@ -10,7 +10,7 @@ class HobiController extends Controller
       /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $datahobi = Hobi::all();
         return view('Hobi.app', compact('datahobi'));

@@ -1,25 +1,25 @@
 @extends('layouts.index')
 @section('content')
     <ul class="m-0 p-0 list-none">
-        <li class="inline-block relative top-[3px] text-base text-primary-500 font-Inter ">
-            <a href="index.html">
+        <li class="inline-block relative top-[3px] text-base text-primary-500 font-Inter">
+            <a href="{{ route('dashboard') }}">
                 <iconify-icon icon="heroicons-outline:home"></iconify-icon>
                 <iconify-icon icon="heroicons-outline:chevron-right"
                     class="relative text-slate-500 text-sm rtl:rotate-180"></iconify-icon>
             </a>
         </li>
-        <li class="inline-block relative text-sm text-primary-500 font-Inter ">
-            Data
-            <iconify-icon icon="heroicons-outline:chevron-right"
-                class="relative top-[3px] text-slate-500 rtl:rotate-180"></iconify-icon>
+        <li class="inline-block relative text-sm text-primary-500 font-Inter">
+            <a href="{{ route('siswa.index') }}">
+                Siswa
+                <iconify-icon icon="heroicons-outline:chevron-right"
+                    class="relative top-[3px] text-slate-500 rtl:rotate-180"></iconify-icon>
+            </a>
+        </li> 
+        <li class="inline-block relative text-sm text-primary-500 font-Inter " @disabled(true)>
+            <a href="">
+                Create Siswa
+            </a>
         </li>
-        <li class="inline-block relative text-sm text-slate-500 font-Inter dark:text-white">
-            Siswa</li>
-        <iconify-icon icon="heroicons-outline:chevron-right"
-            class="relative top-[3px] text-slate-500 rtl:rotate-180"></iconify-icon>
-        </li>
-        <li class="inline-block relative text-sm text-slate-500 font-Inter dark:text-white">
-            Create siswa</li>
     </ul>
     <div class="card mt-4">
         <div class="card-body flex flex-col p-6">

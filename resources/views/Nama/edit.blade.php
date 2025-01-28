@@ -25,7 +25,7 @@
         <div class="card-body flex flex-col p-6">
             <header class="flex mb-5 items-center border-b border-slate-100 dark:border-slate-700 pb-5 -mx-6 px-6">
                 <div class="flex-1">
-                    <div class="card-title text-slate-900 dark:text-white">Input Siswa</div>
+                    <div class="card-title text-slate-900 dark:text-white">Edit Data Siswa</div>
                 </div>
             </header>
             <div class="card-text h-full space-y-4">
@@ -41,6 +41,14 @@
                             <label for="nisn" class="form-label">NISN</label>
                             <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $datasiswa->nisn->nisn }}">
                         </div>
+                        <div id="input-container">
+                            <label for="telepon" class="form-label mr-2">Telepon</label>
+                            @foreach ($datasiswa->telepon as $telepon)
+                            <div class="mb-3 flex items-center">
+                                <input type="number" class="form-control flex-1" id="telepon" name="nomor[]" required value="{{ $telepon->telepon }}">
+                            </div>
+                            @endforeach
+                        </div>  
                         <div class="mb-3">
                             <label for="hobis" class="form-label">Hobi</label>
                             @foreach ($datahobi as $hobi)

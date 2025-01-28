@@ -43,19 +43,12 @@
                                 Hapus
                             </button>
                         </form>
-                        <a href="{{ route('telepon.edit', $phone->id) }}" class="bg-yellow-500 text-slate-700 dark:text-white px-3 py-1 rounded hover:bg-yellow-600">
-                            Edit
-                        </a>
                     </div>
                 </li>
             @endforeach
         </ul>
 
         <div class=" mt-4 items-center justify-start">
-        <a href="{{ route('telepon.create',$datasiswa->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600" >
-            Tambah nomor telepon
-        </a>
-
         <a href="{{ route('siswa.index') }}" class="w-10 h-8 px-4 py-2 text-slate-900 dark:text-white hover:text-white dark:hover:text-slate-500">Kembali</a>
         </div>
     </div>

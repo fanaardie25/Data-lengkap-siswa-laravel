@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="assets/css/rt-plugins.css">
   <link href="https://unpkg.com/aos@2.3.0/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
-  <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
   <!-- START : Theme Config js-->
   <script src="assets/js/settings.js" sync></script>
   <!-- END : Theme Config js-->
@@ -55,47 +55,39 @@
               </a>
             </div>
             <div class="text-center 2xl:mb-10 mb-4">
-              <h4 class="font-medium">Sign in</h4>
+              <h4 class="font-medium">Reset password</h4>
               <div class="text-slate-500 text-base">
                 Sign in to your account to start using Dashcode
               </div>
             </div>
-            <!-- BEGIN: Login Form -->
-            <form class="space-y-4" action='{{ route('login.post') }}' method="POST">
+
+            <!-- BEGIN: Registration Form -->
+            <form class="space-y-4" action='{{ route('password.update') }}' method="POST">
                 @csrf
-              <div class="fromGroup">
-                <label class="block capitalize form-label">email</label>
-                <div class="relative ">
-                  <input type="email" name="email" class="  form-control py-2">
+                <input type="hidden" value="{{ $token }}" name="token">
+              <div class="fromGroup       ">
+                <label class="block capitalize form-label  ">email</label>
+                <div class="relative "><input type="email" name="email" class="  form-control py-2   " placeholder="Enter your email">
                 </div>
               </div>
               <div class="fromGroup       ">
                 <label class="block capitalize form-label  ">password</label>
-                <div class="relative "><input type="password" name="password" class="  form-control py-2   ">
+                <div class="relative "><input type="password" name="password" class="  form-control py-2   " placeholder="Enter your password">
                 </div>
               </div>
-              <div class="flex justify-between">
-                <label class="flex items-center cursor-pointer">
-                  <input type="checkbox" class="hiddens">
-                  <span class="text-slate-500 dark:text-slate-400 text-sm leading-6 capitalize">Keep me signed in</span>
-                </label>
-                <a class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium" href="{{ route('password.request') }}">Forgot
-                  Password?
-                </a>
+              <div class="fromGroup       ">
+                <label class="block capitalize form-label  ">konfirmasi password</label>
+                <div class="relative "><input type="password" name="password_confirmation" class="  form-control py-2   " placeholder="Enter your confirmation password">
+                </div>
               </div>
-              <button type="submit" class="btn btn-dark block w-full text-center">Sign in</button>
+              <button type="submit" class="btn btn-dark block w-full text-center">Reset password</button>
             </form>
-            <!-- END: Login Form -->
-            <div class="relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
-              <div class="absolute inline-block bg-white dark:bg-slate-800 dark:text-slate-400 left-1/2 top-1/2 transform -translate-x-1/2
-                                    px-4 min-w-max text-sm text-slate-500 font-normal">
-                Or continue with
-              </div>
-            </div>
-            <div class="md:max-w-[345px] mx-auto font-normal text-slate-500 dark:text-slate-400 mt-12 uppercase text-sm">
-              Don’t have an account?
-              <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
-                Sign up
+            <!-- END: Registration Form -->
+            <div class="md:max-w-[345px] mx-auto font-normal text-slate-500 dark:text-slate-400 mt-8 uppercase text-sm">
+              <span>ALREADY REGISTERED?
+                            </span>
+              <a href="signin-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
+                Sign In
               </a>
             </div>
           </div>
@@ -111,39 +103,43 @@
   <script src="assets/js/jquery-3.6.0.min.js"></script>
   <script src="assets/js/rt-plugins.js"></script>
   <script src="assets/js/app.js"></script>
+  <!-- scripts -->
+  <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ asset('assets/js/rt-plugins.js') }}"></script>
+  <script src="{{ asset('assets/js/app.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    @if (@session('success'))
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-      }
-      });
-      Toast.fire({
-      icon: "success",
-      title: "{{ session('success') }}"
-      });
-    @endif
+    <script>
+      @if (@session('status'))
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+        });
+        Toast.fire({
+        icon: "success",
+        title: "{{ session('status') }}"
+        });
+      @endif
 
-    @if ($errors->any())
-    @foreach ($errors->all() as $item)
-        
-    
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "{{ $item }}",
-      });
-
+      @if ($errors->any())
+      @foreach ($errors->all() as $item)
+          
       
-    @endforeach
-    @endif
-  </script>
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "{{ $item }}",
+        });
+
+        
+      @endforeach
+      @endif
+    </script>
 </body>
 </html>

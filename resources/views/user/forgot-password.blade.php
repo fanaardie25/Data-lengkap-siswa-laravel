@@ -45,58 +45,44 @@
           <img src="assets/images/auth/ils1.svg" alt="" class=" h-full w-full object-contain">
         </div>
       </div>
-      <div class="right-column  relative">
+      <div class="right-column relative">
         <div class="inner-content h-full flex flex-col bg-white dark:bg-slate-800">
-          <div class="auth-box h-full flex flex-col justify-center">
+          <div class="auth-box2 flex flex-col justify-center h-full">
             <div class="mobile-logo text-center mb-6 lg:hidden block">
               <a href="index.html">
-                <img src="assets/images/logo/logo.svg" alt="" class="mb-10 dark_logo">
-                <img src="assets/images/logo/logo-white.svg" alt="" class="mb-10 white_logo">
+                <img src="assets/images/logo/logo.svg" alt="" class="mx-auto">
+                <img src="assets/images/logo/logo-white.svg" alt="" class="mx-auto">
               </a>
             </div>
-            <div class="text-center 2xl:mb-10 mb-4">
-              <h4 class="font-medium">Sign in</h4>
-              <div class="text-slate-500 text-base">
-                Sign in to your account to start using Dashcode
+            <div class="text-center 2xl:mb-10 mb-5">
+              <h4 class="font-medium mb-4">Forgot Your Password?</h4>
+              <div class="text-slate-500 dark:text-slate-400 text-base">
+                Reset Password with Dashcode.
               </div>
             </div>
-            <!-- BEGIN: Login Form -->
-            <form class="space-y-4" action='{{ route('login.post') }}' method="POST">
+            <div class="font-normal text-base text-slate-500 dark:text-slate-400 text-center px-2 bg-slate-100 dark:bg-slate-600 rounded
+                                py-3 mb-4 mt-10">
+              Enter your Email and instructions will be sent to you!
+            </div>
+            <!-- BEGIN: Forgot Password Form -->
+            <form class="space-y-4" action='' method="POST">
                 @csrf
               <div class="fromGroup">
                 <label class="block capitalize form-label">email</label>
                 <div class="relative ">
-                  <input type="email" name="email" class="  form-control py-2">
+                  <input type="email" name="email" class="  form-control py-2" placeholder="Enter your Email">
                 </div>
               </div>
-              <div class="fromGroup       ">
-                <label class="block capitalize form-label  ">password</label>
-                <div class="relative "><input type="password" name="password" class="  form-control py-2   ">
-                </div>
-              </div>
-              <div class="flex justify-between">
-                <label class="flex items-center cursor-pointer">
-                  <input type="checkbox" class="hiddens">
-                  <span class="text-slate-500 dark:text-slate-400 text-sm leading-6 capitalize">Keep me signed in</span>
-                </label>
-                <a class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium" href="{{ route('password.request') }}">Forgot
-                  Password?
-                </a>
-              </div>
-              <button type="submit" class="btn btn-dark block w-full text-center">Sign in</button>
+              <button type="submit" class="btn btn-dark block w-full text-center">Send recovery email</button>
             </form>
-            <!-- END: Login Form -->
-            <div class="relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
-              <div class="absolute inline-block bg-white dark:bg-slate-800 dark:text-slate-400 left-1/2 top-1/2 transform -translate-x-1/2
-                                    px-4 min-w-max text-sm text-slate-500 font-normal">
-                Or continue with
-              </div>
-            </div>
-            <div class="md:max-w-[345px] mx-auto font-normal text-slate-500 dark:text-slate-400 mt-12 uppercase text-sm">
-              Don’t have an account?
-              <a href="signup-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
-                Sign up
+            <!-- END: Forgot Password Form -->
+
+            <div class="md:max-w-[345px] mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-8 uppercase text-sm">
+              Forget It,
+              <a href="index.html" class="text-slate-900 dark:text-white font-medium hover:underline">
+                Send me Back
               </a>
+              to The Sign In
             </div>
           </div>
           <div class="auth-footer text-center">
@@ -113,7 +99,7 @@
   <script src="assets/js/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-    @if (@session('success'))
+    @if (@session('status'))
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -127,7 +113,7 @@
       });
       Toast.fire({
       icon: "success",
-      title: "{{ session('success') }}"
+      title: "{{ session('status') }}"
       });
     @endif
 

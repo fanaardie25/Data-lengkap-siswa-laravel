@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <title>halaman register</title>
+  <title>Dashcode - HTML Template</title>
   <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +30,10 @@
     <div class="lg-inner-column">
       <div class="left-column relative z-[1]">
         <div class="max-w-[520px] pt-20 ltr:pl-20 rtl:pr-20">
+          <a href="index.html">
+            <img src="assets/images/logo/logo.svg" alt="" class="mb-10 dark_logo">
+            <img src="assets/images/logo/logo-white.svg" alt="" class="mb-10 white_logo">
+          </a>
           <h4>
             Unlock your Project
             <span class="text-slate-800 dark:text-slate-400 font-bold">
@@ -52,6 +56,9 @@
             </div>
             <div class="text-center 2xl:mb-10 mb-4">
               <h4 class="font-medium">Sign in</h4>
+              <div class="text-slate-500 text-base">
+                Sign in to your account to start using Dashcode
+              </div>
             </div>
 
             <!-- BEGIN: Registration Form -->
@@ -74,15 +81,19 @@
                 <div class="relative "><input type="password" name="password" class="  form-control py-2   " placeholder="Enter your password">
                 </div>
               </div>
-              <button class="btn btn-dark block w-full text-center">Create an account</button>
+              <button type="submit" class="btn btn-dark block w-full text-center">Create an account</button>
             </form>
+            <!-- END: Registration Form -->
             <div class="md:max-w-[345px] mx-auto font-normal text-slate-500 dark:text-slate-400 mt-8 uppercase text-sm">
               <span>ALREADY REGISTERED?
                             </span>
-              <a href="{{ route('login') }}" class="text-slate-900 dark:text-white font-medium hover:underline">
+              <a href="signin-one.html" class="text-slate-900 dark:text-white font-medium hover:underline">
                 Sign In
               </a>
             </div>
+          </div>
+          <div class="auth-footer text-center">
+            Copyright 2021, Dashcode All Rights Reserved.
           </div>
         </div>
       </div>
@@ -94,38 +105,38 @@
   <script src="assets/js/rt-plugins.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-      @if (@session('success'))
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-        });
-        Toast.fire({
-        icon: "success",
-        title: "{{ session('success') }}"
-        });
-      @endif
+  <script>
+    @if (@session('success'))
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+      }
+      });
+      Toast.fire({
+      icon: "success",
+      title: "{{ session('success') }}"
+      });
+    @endif
 
-      @if ($errors->any())
-      @foreach ($errors->all() as $item)
-          
-      
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "{{ $item }}",
-        });
-
+    @if ($errors->any())
+    @foreach ($errors->all() as $item)
         
-      @endforeach
-      @endif
-    </script>
+    
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "{{ $item }}",
+      });
+
+      
+    @endforeach
+    @endif
+  </script>
 </body>
 </html>
