@@ -35,7 +35,7 @@
                     <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
                         <!-- Modal header -->
                         <div
-                            class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-black-500">
+                            class="flex items-center justify-between p-5 border-b rounded-t dark:border-slate-600 bg-primary-500">
                             <h3 class="text-xl font-medium text-white dark:text-white capitalize">
                                 Tambah Data Hobi
                             </h3>

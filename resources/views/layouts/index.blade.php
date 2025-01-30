@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
   <!-- End : Theme CSS-->
   <script src="{{ asset('assets/js/settings.js') }}" sync></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+
 </head>
 
 <body class=" font-inter dashcode-app" id="body_class">
@@ -69,6 +73,16 @@
               <span class="flex items-center">
             <iconify-icon class=" nav-icon" icon="heroicons:academic-cap"></iconify-icon>
             <span>Siswa</span>
+              </span>
+            </a>
+          </li>
+          {{-- blog menu --}}
+          <li class="sidebar-menu-title">Blog</li>
+          <li class="">
+            <a href="{{ route('blog.index') }}" class="navItem">
+              <span class="flex items-center">
+            <iconify-icon class=" nav-icon" icon="heroicons:pencil-square-20-solid"></iconify-icon>
+            <span>Post</span>
               </span>
             </a>
           </li>
@@ -370,6 +384,7 @@
             <div class="transition-all duration-150 container-fluid" id="page_layout">
               <div id="content_layout">
                 @yield('content')
+
               </div>
             </div>
           </div>

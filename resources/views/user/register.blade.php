@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <title>Dashcode - HTML Template</title>
-  <link rel="icon" type="image/png" href="assets/images/logo/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,8 +30,7 @@
       <div class="left-column relative z-[1]">
         <div class="max-w-[520px] pt-20 ltr:pl-20 rtl:pr-20">
           <a href="index.html">
-            <img src="assets/images/logo/logo.svg" alt="" class="mb-10 dark_logo">
-            <img src="assets/images/logo/logo-white.svg" alt="" class="mb-10 white_logo">
+            <img src="{{ asset('logo nusa blog.jpg') }}" alt="logo nusa blog" height="80px" width="80px">
           </a>
           <h4>
             Unlock your Project
@@ -57,7 +55,7 @@
             <div class="text-center 2xl:mb-10 mb-4">
               <h4 class="font-medium">Sign in</h4>
               <div class="text-slate-500 text-base">
-                Sign in to your account to start using Dashcode
+                Sign up to your account 
               </div>
             </div>
 
@@ -93,7 +91,7 @@
             </div>
           </div>
           <div class="auth-footer text-center">
-            Copyright 2021, Dashcode All Rights Reserved.
+            Copyright 2025, Nusa Blog All Rights Reserved.
           </div>
         </div>
       </div>

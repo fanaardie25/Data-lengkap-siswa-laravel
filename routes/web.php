@@ -14,17 +14,28 @@ use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\TeleponController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NameInTeleponController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\SocialiteController;
+use App\Models\Post;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $datapost = Post::with('images')->get();
+    return view('welcome',compact('datapost'));
+})->name('welcome');
 
+Route::get('/detail-blog/{blog}', function (Post $blog) {
+    $blog->load('images'); 
+    return view('detail-blog', compact('blog'));
+})->name('detail.blog');
 
 Route::get('/register', [AuthController::class, 'tampilRegister'])->name('register');
 Route::post('/register/submit', [AuthController::class, 'submitRegister'])->name('register.post');
 
 Route::get('/login', [AuthController::class, 'tampilLogin'])->name('login');
 Route::post('/login/submit', [AuthController::class, 'submitLogin'])->name('login.post');
+
+Route::get('/auth/{provider}/redirect', [SocialiteController::class,'redirect'])->name('socialite.redirect');
+Route::get('auth/{provider}/callback', [SocialiteController::class,'callback'])->name('socialite.callback');
 
 Route::get('/forgot-password', function () {
     return view('user.forgot-password');
@@ -77,5 +88,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('siswa', SiswaController::class);
     Route::get('/telepon/create/{siswa}', [TeleponController::class, 'create'])->name('telepon.create');
     Route::resource('telepon', TeleponController::class)->except(['create']);
+    Route::resource('blog', PostController::class);
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
